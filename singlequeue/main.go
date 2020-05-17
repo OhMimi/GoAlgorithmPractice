@@ -10,8 +10,8 @@ import (
 type Queue struct {
 	MaxSize int
 	Array   [5]int // 陣列 => 模擬隊列
-	Front   int    // 表示指向隊列隊首
-	Rear    int    // 表示指向隊列隊尾
+	Front   int    // 表示指向隊列隊首  -1
+	Rear    int    // 表示指向隊列隊尾  -1
 }
 
 // 添加數據到對列
