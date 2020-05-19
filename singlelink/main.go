@@ -60,6 +60,31 @@ func InsertHeroNode2(head, newHeroNode *HeroNode) {
 	}
 }
 
+// 刪除鍊表中一個節點
+func DelHeroNode(head *HeroNode, id int) {
+	// 1. 先找到該鍊表的最後的節點
+	temp := head
+	flag := false
+	// 找到要刪除的節點
+	for {
+		if temp.next == nil { // 表示找到最後
+			break
+		} else if temp.next.no == id {
+			// 說明已經找到要刪除的節點
+			flag = true
+			break
+		} else {
+			temp = temp.next
+		}
+	}
+
+	if flag {
+		temp.next = temp.next.next
+	} else {
+		fmt.Println("要刪除的ID不存在")
+	}
+}
+
 // 顯示鍊表的所有節點信息
 func ListHeroNode(head *HeroNode) {
 	// 1. 創建一個輔助節點
@@ -80,6 +105,7 @@ func ListHeroNode(head *HeroNode) {
 			break
 		}
 	}
+	fmt.Println()
 }
 
 func main() {
@@ -119,5 +145,11 @@ func main() {
 	InsertHeroNode2(head, hero2)
 
 	// 4. 顯示
+	ListHeroNode(head)
+
+	// 5. 刪除
+	DelHeroNode(head, 2)
+
+	// 6. 顯示
 	ListHeroNode(head)
 }
