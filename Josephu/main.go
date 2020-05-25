@@ -117,9 +117,9 @@ func PlayGame(first *Boy, startNo, countNum int) {
 }
 
 func main() {
-	first := AddBoy(5)
+	first := AddBoy(500)
 	// 顯示
-	ShowBoy(first)
+	// ShowBoy(first)
 
-	PlayGame(first, 2, 3)
+	PlayGame(first, 20, 31)
 }
