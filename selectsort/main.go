@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// 泡末排序(bubble sort)大到小
+// 選擇排序(select sort)大到小
 func SelectSort(arr *[5]int) {
 	// (*arr)[1] 等價於 arr[1]
 	// arr[1] = 600
