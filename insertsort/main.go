@@ -24,27 +24,6 @@ func InsertSort(arr *[10]int) {
 
 }
 
-// func InsertSort(arr *[5]int) {
-// 	arrLength := len(arr)
-// 	for i := 1; i < arrLength; i++ {
-// 		// 完成第i次,給第i+1個元素找到合適的位置並插入
-// 		interVal := arr[i]
-// 		insertIndex := i - 1 // 下標
-
-// 		// 從大到小
-// 		for insertIndex >= 0 && arr[insertIndex] < insertIndex {
-// 			arr[insertIndex+1] = arr[insertIndex] // 數據後移
-// 			insertIndex--
-// 		}
-
-// 		// 插入
-// 		if insertIndex+1 != i {
-// 			arr[insertIndex+1] = interVal
-// 		}
-// 	}
-// 	fmt.Println("inert arr = ", arr)
-// }
-
 func main() {
 	// arr := [5]int{10, 34, 19, 100, 80}
 	arr := [10]int{89, 98, 42, 71, 95, 40, 66, 26, 6, 14}
