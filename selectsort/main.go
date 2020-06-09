@@ -1,9 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 // 選擇排序(select sort)大到小
-func SelectSort(arr *[5]int) {
+func SelectSort(arr *[80000]int) {
 	// (*arr)[1] 等價於 arr[1]
 	// arr[1] = 600
 
@@ -31,9 +35,20 @@ func SelectSort(arr *[5]int) {
 }
 
 func main() {
+	var arrtest [80000]int
+	for i := 0; i < 80000; i++ {
+		arrtest[i] = rand.Intn(900000)
+	}
+
+	fmt.Println("開始排序")
+	start := time.Now().Unix()
+	SelectSort(&arrtest)
+	end := time.Now().Unix()
+	fmt.Printf("選擇排序耗時=%d秒\n", end-start)
+
 	// 定義一個數組
-	arr := [5]int{10, 34, 19, 100, 80}
-	fmt.Println("arr = ", arr)
-	SelectSort(&arr)
-	fmt.Println("sort arr = ", arr)
+	// arr := [5]int{10, 34, 19, 100, 80}
+	// fmt.Println("arr = ", arr)
+	// SelectSort(&arr)
+	// fmt.Println("sort arr = ", arr)
 }
