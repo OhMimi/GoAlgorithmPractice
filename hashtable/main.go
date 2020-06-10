@@ -68,9 +68,10 @@ func (this *EmpLink) ShowLink(no int) {
 
 	//變量當前的鍊表,並顯示數據
 	cur := this.Head // 輔助的指針
+	fmt.Printf("鍊表%d ", no)
 	for {
 		if cur != nil {
-			fmt.Printf("鍊表%d  雇員id=%d  名字=%s  ->", no, cur.Id, cur.Name)
+			fmt.Printf("雇員id=%d  名字=%s  ->", cur.Id, cur.Name)
 			cur = cur.Next
 		} else { // cur == nil 代表已遍歷至鍊表尾部
 			break
@@ -92,6 +93,45 @@ func (this *EmpLink) FindById(id int) *Emp {
 	}
 
 	return cur
+}
+
+// 根據id刪除對應的雇員
+func (this *EmpLink) DeleteById(id int) {
+	cur := this.Head
+	flag := false
+	if cur == nil {
+		fmt.Printf("鍊表%d為空,無法刪除\n", id%7)
+		return
+	}
+
+	if cur.Id == id {
+		if cur.Next == nil {
+			var emp *Emp
+			this.Head = emp
+		} else {
+			this.Head = cur.Next
+		}
+		fmt.Printf("鍊表%d找到id=%d的對應雇員,已刪除\n", id%7, id)
+		return
+	} else {
+		for {
+			if cur.Next != nil && cur.Next.Id == id {
+				flag = true
+				break
+			} else if cur.Next == nil {
+				break
+			} else {
+				cur = cur.Next
+			}
+		}
+	}
+
+	if flag {
+		cur.Next = cur.Next.Next
+		fmt.Printf("鍊表%d找到id=%d的對應雇員,已刪除\n", id%7, id)
+	} else {
+		fmt.Printf("鍊表%d沒有找到id=%d的對應雇員,無法刪除\n", id%7, id)
+	}
 }
 
 // 定義hashtable, 含有一個鍊表陣列
@@ -127,6 +167,13 @@ func (this *HashTable) FindById(id int) *Emp {
 	return this.LinkArr[linkNo].FindById(id)
 }
 
+// 編寫一個方法完成刪除
+func (this *HashTable) DeleteById(id int) {
+	// 使用散列函數,確定將該雇員在哪個鍊表
+	linkNo := this.HashFun(id)
+	this.LinkArr[linkNo].DeleteById(id)
+}
+
 func main() {
 	var hashTable HashTable
 	key := ""
@@ -134,9 +181,10 @@ func main() {
 	name := ""
 	for {
 		fmt.Println("====雇員系統菜單====")
-		fmt.Println("input 添加雇員")
-		fmt.Println("show  顯示雇員")
-		fmt.Println("find  查找雇員")
+		fmt.Println("input   添加雇員")
+		fmt.Println("show    顯示雇員")
+		fmt.Println("find    查找雇員")
+		fmt.Println("delete  刪除雇員")
 		fmt.Println("exit  退出系統")
 		fmt.Println("請輸入你的選擇:")
 		fmt.Scanln(&key)
@@ -162,6 +210,10 @@ func main() {
 			} else {
 				emp.ShowEmp()
 			}
+		case "delete":
+			fmt.Println("輸入雇員的ID:")
+			fmt.Scanln(&id)
+			hashTable.DeleteById(id)
 		case "exit":
 			os.Exit(0)
 		default:
